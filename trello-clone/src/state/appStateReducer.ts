@@ -1,7 +1,7 @@
 import { Action } from './actions';
 import { nanoid } from 'nanoid';
-import { findItemIndexById } from "./arrayUtils";
-
+import { findItemIndexById, moveItem } from "./arrayUtils";
+import { DragItem } from "../DragItem";
 /* Nice Type Composition Actually */
 export type Task = {
   id: string;
@@ -16,13 +16,12 @@ export type List = {
 
 export type AppState = {
   lists: List[];
+  draggedItem: DragItem | null;
 };
 
-/* *
+/* 
   * We Don't Need to use the useReducer neither return the App State anymore, the ImmerJs will take care of it for us.
 */
-
-
 export const appStateReducer = (draft: AppState, action: Action): AppState | void => {
   switch (action.type) {
     case "ADD_LIST": {
@@ -41,6 +40,17 @@ export const appStateReducer = (draft: AppState, action: Action): AppState | voi
         id: nanoid(),
         text
       })
+      break
+    }
+    case "MOVE_LIST": {
+      const { draggedId, hoverId } = action.payload
+      const dragIndex = findItemIndexById(draft.lists, draggedId)
+      const hoverIndex = findItemIndexById(draft.lists, hoverId)
+      draft.lists = moveItem(draft.lists, dragIndex, hoverIndex)
+      break
+    }
+    case "SET_DRAGGED_ITEM": {
+      draft.draggedItem = action.payload
       break
     }
     default: {
