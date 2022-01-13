@@ -1,9 +1,8 @@
 import { ColumnContainer, ColumnTitle } from "./styles";
-import { FC, Key } from "react";
 import { AddNewItem } from "./AddNewItem";
+import { addTask } from "./state/actions";
 import { useAppState } from "./state/AppStateContext";
 import { Card } from "./Card";
-import { addTask } from "./state/actions";
 /* Here we define about the Interface for the generics Functional Component of react */
 interface ColumnProps {
   text: string;
@@ -22,7 +21,7 @@ export const Column = ({ text, id }: ColumnProps) => {
       ))}
       <AddNewItem
         toggleButtonText="+ Add another card"
-        onAdd={(text) => dispatch(addTask(text as string, id))}
+        onAdd={(text: string) => dispatch(addTask(text, id))}
         dark
       />
     </ColumnContainer>

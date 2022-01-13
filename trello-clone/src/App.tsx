@@ -14,7 +14,7 @@ export const App = () => {
       ))}
       <AddNewItem
         toggleButtonText="+ Add another list"
-        onAdd={(text) => dispatch(addList(text as string))}
+        onAdd={(text: string) => dispatch(addList(text))}
       />
     </AppContainer>
   );

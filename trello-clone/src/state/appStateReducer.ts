@@ -23,6 +23,7 @@ export type AppState = {
 
 
 export const appStateReducer = (draft: AppState, action: Action): AppState | void => {
+  console.log("App State Reduce has been called");
   switch (action.type) {
     case "ADD_LIST": {
       draft.lists.push({
