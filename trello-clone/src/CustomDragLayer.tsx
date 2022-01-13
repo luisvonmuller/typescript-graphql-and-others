@@ -1,5 +1,6 @@
 import { useDragLayer } from "react-dnd"; // Will Provide us information about the Drag Item
 import { Column } from "./Column"; // Its going to be our target location to place which is being dragged
+import { Card } from "./Card"; // Same as Above
 import { CustomDragLayerContainer, DragPreviewWrapper } from "./styles"; // “s our dragging layer, we’ll render the dragging preview inside of it.
 import { useAppState } from "./state/AppStateContext"; // Getting the (array) logicial position from it
 
@@ -12,11 +13,16 @@ export const CustomDragLayer = () => {
   }));
 
   return draggedItem && currentOffset ? (
-    <CustomDragLayerContainer>
-      <DragPreviewWrapper position={currentOffset}>
-        <Column id={draggedItem.id} text={draggedItem.text} isPreview />
-      </DragPreviewWrapper>
-    </CustomDragLayerContainer>
+    draggedItem.type === "COLUMN" ? (
+      <Column id={draggedItem.id} text={draggedItem.text} isPreview />
+    ) : (
+      <Card
+        columnId={draggedItem.columnId}
+        isPreview
+        id={draggedItem.id}
+        text={draggedItem.text}
+      />
+    )
   ) : (
     <></>
   );

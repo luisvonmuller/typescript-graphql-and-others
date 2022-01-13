@@ -17,22 +17,17 @@ export const Card = ({ text, id, columnId, isPreview }: CardProps) => {
   const { draggedItem, dispatch } = useAppState();
   const ref = useRef<HTMLDivElement>(null);
 
-  const { drag } = useItemDrag({
-    type: "CARD",
-    id,
-    text,
-    columnId,
-  });
-
   const [, drop] = useDrop({
     accept: "CARD",
     hover() {
       if (!draggedItem) {
         return;
       }
+
       if (draggedItem.type !== "CARD") {
         return;
       }
+
       if (draggedItem.id === id) {
         return;
       }
@@ -41,9 +36,14 @@ export const Card = ({ text, id, columnId, isPreview }: CardProps) => {
     },
   });
 
-  const continueBefore = CustomDragLayer(draggedItem);
-  let startsAtPage =
-    "164 from the first paragraph ... Inside... and continues...";
+  const { drag } = useItemDrag({
+    type: "CARD",
+    id,
+    text,
+    columnId,
+  });
+
+  drag(drop(ref));
 
   return (
     <CardContainer
