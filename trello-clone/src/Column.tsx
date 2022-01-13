@@ -30,7 +30,6 @@ export const Column = ({ text, id, isPreview }: ColumnProps) => {
         if (draggedItem.id === id) {
           return;
         }
-
         dispatch(moveList(draggedItem.id, id));
       }
     },
@@ -41,6 +40,7 @@ export const Column = ({ text, id, isPreview }: ColumnProps) => {
   drag(drop(ref));
   return (
     <ColumnContainer
+      isPreview={isPreview}
       ref={ref}
       isHidden={isHidden(draggedItem, "COLUMN", id, isPreview)}
     >
