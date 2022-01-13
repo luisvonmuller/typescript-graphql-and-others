@@ -1,10 +1,12 @@
 import { CardContainer } from "./styles";
 
 interface CardProps {
-  text: string;
   id: string;
+  text: string;
+  columnId: string;
+  isPreview?: boolean;
 }
 
-export const Card = ({ text }: CardProps) => {
+export const Card = ({ id, text }: CardProps) => {
   return <CardContainer>{text}</CardContainer>;
 };
