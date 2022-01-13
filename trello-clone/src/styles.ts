@@ -1,6 +1,5 @@
 import styled from "styled-components";
-
-
+// CODE BEGINS CODE BEGINS CODE BEGINS CODE BEGINS CODE BEGINS CODE BEGINS CODE BEGINS CODE BEGINS CODE BEGINS
 type DragPreviewContainerProps = {
   isHidden?: boolean
   isPreview?: boolean
@@ -77,8 +76,8 @@ export const AddItemButton = styled.button<AddItemButtonProps>`
   max-width: 300px;
   padding: 10px 12px;
   text-align: left;
-  transition: background 85ms ease -in;
-  width: 100 %;
+  transition: background 85ms ease-in;
+  width: 100%;
     &:hover {
     background - color: #ffffff52;
   }
@@ -88,7 +87,7 @@ export const NewItemFormContainer = styled.div`
   max-width: 300px;
   display: flex;
   flex-direction: column;
-  width: 100 %;
+  width: 100%;
   align-items: flex-start;
 `
 
@@ -108,15 +107,15 @@ export const NewItemInput = styled.input`
   box-shadow: #091e4240 0px 1px 0px 0px;
   margin-bottom: 0.5rem;
   padding: 0.5rem 1rem;
-  width: 100 %;
+  width: 100%;
 `
 /* That Cool Layer that stands above all but not all */
 export const CustomDragLayerContainer = styled.div`
-  height: 100 %;
+  height: 100%;
   left: 0;
   pointer-events: none;
   position: fixed;
   top: 0;
-  width: 100 %;
+  width: 100%;
   z-index: 100;
 `
