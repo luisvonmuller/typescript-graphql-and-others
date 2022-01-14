@@ -1,45 +1,25 @@
-import styled from "styled-components";
-// CODE BEGINS CODE BEGINS CODE BEGINS CODE BEGINS CODE BEGINS CODE BEGINS CODE BEGINS CODE BEGINS CODE BEGINS
-type DragPreviewContainerProps = {
+import styled from "styled-components"
+
+export const AppContainer = styled.div`
+  align-items: flex-start;
+  background-color: #3179ba;
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  padding: 20px;
+  width: 100%;
+`
+
+interface DragPreviewContainerProps {
   isHidden?: boolean
   isPreview?: boolean
 }
-
-type DragPreviewWrapperProps = {
-  position: {
-    x: number
-    y: number
-  }
-}
-
-/* This will be a dark more later on k */
-type AddItemButtonProps = {
-  dark?: boolean
-}
-/* Since every element gonna create an unique ID on the DOM we should use: attrs method to downgrade computations */
-export const DragPreviewWrapper = styled.div.attrs<DragPreviewWrapperProps>(
-  ({ position: { x, y } }) => ({
-    style: {
-      transform: `translate(${x}px, ${y}px)`
-    }
-  })
-) <DragPreviewWrapperProps>``
 
 export const DragPreviewContainer = styled.div<DragPreviewContainerProps>`
   transform: ${props => (props.isPreview ? "rotate(5deg)" : undefined)};
   opacity: ${props => (props.isHidden ? 0 : 1)};
 `
 
-export const AppContainer = styled.div`
-  align-items: flex-start;
-  background-color: #3179ba;
-  display: flex;
-  height: 100%;
-  flex-direction: row;
-  padding: 20px;
-  width: 100%;
-`
-//! HERE IS A COOL WAY TO EXTEND CSS STUFF. 
 export const ColumnContainer = styled(DragPreviewContainer)`
   background-color: #ebecf0;
   width: 300px;
@@ -48,6 +28,7 @@ export const ColumnContainer = styled(DragPreviewContainer)`
   border-radius: 3px;
   padding: 8px 8px;
   flex-grow: 0;
+  flex-shrink: 0;
 `
 
 export const ColumnTitle = styled.div`
@@ -65,7 +46,9 @@ export const CardContainer = styled(DragPreviewContainer)`
   box-shadow: #091e4240 0px 1px 0px 0px;
 `
 
-
+interface AddItemButtonProps {
+  dark?: boolean
+}
 
 export const AddItemButton = styled.button<AddItemButtonProps>`
   background-color: #ffffff3d;
@@ -78,8 +61,8 @@ export const AddItemButton = styled.button<AddItemButtonProps>`
   text-align: left;
   transition: background 85ms ease-in;
   width: 100%;
-    &:hover {
-    background - color: #ffffff52;
+  &:hover {
+    background-color: #ffffff52;
   }
 `
 
@@ -89,6 +72,15 @@ export const NewItemFormContainer = styled.div`
   flex-direction: column;
   width: 100%;
   align-items: flex-start;
+`
+
+export const NewItemInput = styled.input`
+  border-radius: 3px;
+  border: none;
+  box-shadow: #091e4240 0px 1px 0px 0px; 
+  margin-bottom: 0.5rem;
+  padding: 0.5rem 1rem;
+  width: 100%;
 `
 
 export const NewItemButton = styled.button`
@@ -101,15 +93,6 @@ export const NewItemButton = styled.button`
   text-align: center;
 `
 
-export const NewItemInput = styled.input`
-  border-radius: 3px;
-  border: none;
-  box-shadow: #091e4240 0px 1px 0px 0px;
-  margin-bottom: 0.5rem;
-  padding: 0.5rem 1rem;
-  width: 100%;
-`
-/* That Cool Layer that stands above all but not all */
 export const CustomDragLayerContainer = styled.div`
   height: 100%;
   left: 0;

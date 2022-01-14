@@ -1,29 +1,50 @@
-import { useDragLayer } from "react-dnd"; // Will Provide us information about the Drag Item
-import { Column } from "./Column"; // Its going to be our target location to place which is being dragged
-import { Card } from "./Card"; // Same as Above
-import { CustomDragLayerContainer, DragPreviewWrapper } from "./styles"; // “s our dragging layer, we’ll render the dragging preview inside of it.
-import { useAppState } from "./state/AppStateContext"; // Getting the (array) logicial position from it
+import React from "react";
+import { XYCoord, useDragLayer } from "react-dnd";
+import { Column } from "./Column";
+import { CustomDragLayerContainer } from "./styles";
+import { Card } from "./Card";
 
-export const CustomDragLayer = () => {
-  const { draggedItem } = useAppState();
+function getItemStyles(currentOffset: XYCoord | null) {
+  if (!currentOffset) {
+    return {
+      display: "none",
+    };
+  }
 
-  /* The useDragLayer hook allows us to get the information from the React-DnD internal state */
-  const { currentOffset } = useDragLayer((monitor) => ({
+  const { x, y } = currentOffset;
+
+  const transform = `translate(${x}px, ${y}px)`;
+  return {
+    transform,
+    WebkitTransform: transform,
+  };
+}
+
+export const CustomDragLayer: React.FC = () => {
+  const { isDragging, item, currentOffset } = useDragLayer((monitor) => ({
+    item: monitor.getItem(),
     currentOffset: monitor.getSourceClientOffset(),
+    isDragging: monitor.isDragging(),
   }));
 
-  return draggedItem && currentOffset ? (
-    draggedItem.type === "COLUMN" ? (
-      <Column id={draggedItem.id} text={draggedItem.text} isPreview />
-    ) : (
-      <Card
-        columnId={draggedItem.columnId}
-        isPreview
-        id={draggedItem.id}
-        text={draggedItem.text}
-      />
-    )
-  ) : (
-    <></>
+  if (!isDragging) {
+    return null;
+  }
+
+  return (
+    <CustomDragLayerContainer>
+      <div style={getItemStyles(currentOffset)}>
+        {item.type === "COLUMN" ? (
+          <Column id={item.id} text={item.text} isPreview={true} />
+        ) : (
+          <Card
+            columnId={item.columnId}
+            isPreview={true}
+            id={item.id}
+            text={item.text}
+          />
+        )}
+      </div>
+    </CustomDragLayerContainer>
   );
 };
