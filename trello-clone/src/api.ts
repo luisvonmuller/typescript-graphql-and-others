@@ -1,5 +1,7 @@
 import { AppState } from "./state/appStateReducer";
 
+/* This could be replaced by axious as always did */
+
 export const save = (payload: AppState) => {
   return fetch(`${process.env.REACT_APP_BACKEND_ENDPOINT}/save`, {
     method: "POST",
@@ -29,3 +31,6 @@ export const load = () => {
     }
   )
 }
+
+/* Other methods like put etc would be done here, but I would prefer to just use Axios within the Types, but I don't know,
+this is also kinda great because you could do some type "omit" that would be very useful. */

@@ -33,7 +33,7 @@ export const Card = ({ text, id, columnId, isPreview }: CardProps) => {
       }
 
       dispatch(moveTask(draggedItem.id, id, draggedItem.columnId, columnId));
-      dispatch(setDraggedItem({ ...draggedItem, columnId: id })); //! AQUI DEVE SER O BUG...
+      dispatch(setDraggedItem({ ...draggedItem, columnId: id }));
     },
   });
 
